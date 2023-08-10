@@ -1,0 +1,19 @@
+.portfolio {
+  max-width: 1140px;
+  margin: auto;
+  padding: 100px 70px 125px;
+}
+
+.portfolio__title {
+  color: #a0a0a0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  margin-bottom: 50px;
+}
+
+.portfolio__line {
+  background-color: #e8e8e8;
+  height: 1px;
+  width: 100%;
+}

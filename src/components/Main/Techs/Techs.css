@@ -1,0 +1,34 @@
+.techs {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 70px;
+}
+
+.techs__header {
+  margin: 0 auto;
+  font-size: 50px;
+  line-height: 58px;
+  font-weight: 400;
+  text-align: center;
+  padding-top: 90px;
+}
+
+.techs__text {
+  margin: 0 auto;
+  max-width: 460px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  padding-top: 26px;
+}
+
+.techs__list {
+  list-style: none;
+  justify-content: center;
+  padding: 100px 0;
+  margin: 0;
+  display: grid;
+  column-gap: 10px;
+  grid-template-columns: repeat(7, 90px);
+}

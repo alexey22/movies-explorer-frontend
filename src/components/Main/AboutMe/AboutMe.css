@@ -1,0 +1,58 @@
+.about-me {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 70px;
+}
+
+.about-me__container {
+  padding-top: 66px;
+  display: grid;
+  grid-template-areas:
+    'name photo'
+    'profession photo'
+    'description photo'
+    'link photo';
+  grid-template-columns: 600px 270px;
+  grid-template-rows: 58px 28px 114px 126px;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.about-me__name {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0;
+  grid-area: name;
+}
+
+.about-me__profession {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0;
+  grid-area: profession;
+}
+
+.about-me__description {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  margin: 0;
+  width: 600px;
+  grid-area: description;
+}
+
+.about-me__link {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+  grid-area: link;
+  justify-self: start;
+}
+
+.about-me__photo {
+  grid-area: photo;
+}

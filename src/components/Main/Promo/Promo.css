@@ -1,0 +1,20 @@
+.promo {
+  background-image: url('./promo-pic.svg');
+  background-color: #f3c1f8;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 524px;
+}
+
+.promo__h1 {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  width: 730px;
+  text-align: center;
+
+  margin: auto;
+  padding-top: 184px;
+  padding-bottom: 224px;
+}

@@ -1,0 +1,26 @@
+.project {
+  list-style: none;
+}
+
+.project__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+  text-decoration: none;
+  color: black;
+}
+
+.project__title {
+  font-size: 30px;
+  line-height: 50px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.project__link-symbol {
+  font-size: 30px;
+  line-height: 50px;
+  font-weight: 400;
+  margin: 0;
+}
