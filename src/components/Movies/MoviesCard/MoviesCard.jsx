@@ -16,7 +16,12 @@ function MoviesCard({ nameRU, image, duration, trailerLink, isSaved }) {
         <button className='card__save'>Сохранить</button>
       )}
 
-      <a className='card__link' href={trailerLink}>
+      <a
+        className='card__link'
+        href={trailerLink}
+        target='_blank'
+        rel='noreferrer'
+      >
         <figure className='card__figure'>
           <img className='card__image' src={image} alt={alt} />
           <figcaption className='card__text'>

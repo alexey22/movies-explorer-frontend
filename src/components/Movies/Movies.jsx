@@ -1,7 +1,9 @@
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
-
-import { useState, useEffect } from 'react';
+import More from './More/More';
 
 import './Movies.css';
 
@@ -9,7 +11,7 @@ function Movies() {
   const movies = [
     {
       id: 1,
-      nameRU: '«Роллинг Стоунз» в изгнании',
+      nameRU: '«Роллинг Стоунз» в полном изгнании',
       duration: 61,
       image:
         'https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg',
@@ -104,8 +106,13 @@ function Movies() {
 
   return (
     <>
-      <SearchForm />
-      <MoviesCardList movies={movies} />
+      <Header isLoggedIn={true} />
+      <main className='movies'>
+        <SearchForm />
+        <MoviesCardList movies={movies} />
+        <More />
+      </main>
+      <Footer />
     </>
   );
 }

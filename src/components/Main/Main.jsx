@@ -1,5 +1,8 @@
 import './Main.css';
 
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
 import Promo from './Promo/Promo';
 import NavTab from './NavTab/NavTab';
 import AboutProject from './AboutProject/AboutProject';
@@ -10,12 +13,16 @@ import Portfolio from './Portfolio/Portfolios';
 function Main() {
   return (
     <>
-      <Promo />
-      <NavTab />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
+      <Header isLoggedIn={false} />
+      <main>
+        <Promo />
+        <NavTab />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
+      <Footer />
     </>
   );
 }

@@ -1,7 +1,12 @@
 .portfolio {
   max-width: 1140px;
   margin: auto;
-  padding: 100px 70px 125px;
+  padding: 100px 70px 110px;
+}
+
+.portfolio__list {
+  margin: 0;
+  padding: 0;
 }
 
 .portfolio__title {
@@ -9,11 +14,22 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
-  margin-bottom: 50px;
+  margin: 0;
+  padding-bottom: 30px;
 }
 
-.portfolio__line {
-  background-color: #e8e8e8;
-  height: 1px;
-  width: 100%;
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 90px 50px 70px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .portfolio {
+    padding: 70px 14px 51px;
+  }
+  .portfolio__title {
+    font-size: 14px;
+    padding-bottom: 20px;
+  }
 }

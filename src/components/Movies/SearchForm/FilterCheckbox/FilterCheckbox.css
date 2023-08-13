@@ -14,8 +14,30 @@
 }
 
 .filter__checkbox {
-  margin-right: 14px;
+  /* margin-right: 14px;
+  margin-left: 29px; */
+  position: absolute;
+  width: 1px; /* если у элемента не будет размеров, некоторые браузеры посчитают, что его вообще нет */
+  height: 1px;
+  overflow: hidden; /* без этого свойства тоже сработает, но так наверняка. Мы его ещё изучим, оно скрывает элементы, выходящие за границы родителя */
+  clip-path: inset(0 0 0 0);
+}
+
+.filter__checkbox + span {
+  background-image: url('./checkbox-off.svg');
+}
+
+.filter__checkbox:checked + span {
+  background-image: url('./checkbox-on.svg');
+}
+
+.filter__visible-checkbox {
+  width: 36px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
   margin-left: 29px;
+  margin-right: 14px;
 }
 
 .filter__label {
@@ -23,6 +45,8 @@
   line-height: 18px;
   font-weight: 400;
   padding-right: 30px;
+  display: flex;
+  cursor: pointer;
   /* no text select */
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -32,6 +56,28 @@
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
-.filter__label:hover {
-  cursor: pointer;
+@media screen and (max-width: 768px) {
+  .filter__label {
+    padding-right: 20px;
+  }
+  .filter__visible-checkbox {
+    margin-left: 19px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .filter__line {
+    display: none;
+  }
+
+  .filter__label {
+    padding-right: 20px;
+
+    font-size: 11px;
+    margin: 45px auto 44px;
+  }
+
+  .filter__visible-checkbox {
+    margin-left: 19px;
+  }
 }

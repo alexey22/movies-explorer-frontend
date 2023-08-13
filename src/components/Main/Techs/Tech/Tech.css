@@ -8,4 +8,13 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 768px) {
+  .tech {
+    font-size: 12px;
+    line-height: 15px;
+    height: 57px;
+  }
 }

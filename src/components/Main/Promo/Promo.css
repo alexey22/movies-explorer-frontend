@@ -2,19 +2,57 @@
   background-image: url('./promo-pic.svg');
   background-color: #f3c1f8;
   background-repeat: no-repeat;
-  background-position: center;
-  height: 524px;
+  background-position: top 82px left 50%;
+  background-size: 320px;
+  display: flex;
+  justify-content: center;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .promo__h1 {
-  font-family: 'Inter', Arial, sans-serif;
   font-size: 50px;
   font-weight: 400;
   line-height: 58px;
   width: 730px;
   text-align: center;
-
-  margin: auto;
+  margin: 0;
   padding-top: 184px;
   padding-bottom: 224px;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 768px) {
+  .promo__h1 {
+    padding-top: 326px;
+    padding-bottom: 342px;
+  }
+
+  .promo {
+    background-size: 320px;
+    background-position: top 224px left 50%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .promo__h1 {
+    width: 300px;
+    font-size: 31px;
+    line-height: 39px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .promo__h1 {
+    width: 300px;
+    font-size: 31px;
+    line-height: 39px;
+    padding-top: 207px;
+    padding-bottom: 246px;
+  }
+
+  .promo {
+    background-position: top 142px left 50%;
+    background-size: 248px;
+  }
 }

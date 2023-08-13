@@ -6,7 +6,7 @@
   background-color: white;
 }
 
-.header__container {
+.header {
   display: flex;
   justify-content: space-between;
   max-width: 1140px;
@@ -17,4 +17,17 @@
 .header__logo {
   padding-top: 18px;
   padding-bottom: 18px;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+    padding: 0 14px;
+  }
 }

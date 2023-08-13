@@ -10,6 +10,10 @@
   text-decoration: none;
 }
 
+.card:hover .card__save {
+  display: block;
+}
+
 .card__save {
   border: 0;
   background-color: #f9f9f9;
@@ -23,14 +27,11 @@
   top: 14px;
   right: 14px;
   display: none;
-}
-
-.card__save:hover {
   cursor: pointer;
 }
 
-.card:hover .card__save {
-  display: block;
+.card__save:hover {
+  opacity: 0.8;
 }
 
 .card__saved {
@@ -45,17 +46,19 @@
   position: absolute;
   top: 14px;
   right: 14px;
-}
-
-.card__saved:hover {
   cursor: pointer;
 }
 
+.card__saved:hover {
+  opacity: 0.8;
+}
+
 .card__image {
-  max-width: 100%;
+  width: 100%;
   border-radius: 6px;
-  aspect-ratio: 1.8;
+  aspect-ratio: 360 / 200;
   object-fit: cover;
+  display: block;
 }
 
 .card__text {
@@ -71,15 +74,45 @@
   font-weight: 500;
   line-height: 16px;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: calc(100% - 60px);
 }
 
 .card__duration {
   margin: 0;
-  padding: 3px 4px;
+  padding: 4px 8px;
   color: #a0a0a0;
   font-size: 11px;
-  font-weight: 400;
   line-height: 10px;
+  font-weight: 400;
   background-color: #f9f9f9;
   border-radius: 3px;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 1000px) {
+  .card__image {
+    aspect-ratio: 339 / 190;
+  }
+
+  .card__text {
+    margin: 25px 0;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .card__image {
+    aspect-ratio: 339 / 190;
+  }
+
+  .card__text {
+    margin: 16px 0;
+  }
+
+  .card__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

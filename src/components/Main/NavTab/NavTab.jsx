@@ -5,15 +5,15 @@ import './NavTab.css';
 function NavTab() {
   return (
     <section className='navtab'>
-      <Link className='navtab__link' to='/'>
+      <a className='navtab__link' href='#section1'>
         О проекте
-      </Link>
-      <Link className='navtab__link' to='/'>
+      </a>
+      <a className='navtab__link' href='#section2'>
         Технологии
-      </Link>
-      <Link className='navtab__link' to='/'>
+      </a>
+      <a className='navtab__link' href='#section3'>
         Студент
-      </Link>
+      </a>
     </section>
   );
 }

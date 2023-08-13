@@ -1,13 +1,21 @@
 .reg {
-  width: 396px;
+  max-width: 396px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.reg__logo {
+  margin-top: 70px;
+  margin-bottom: 40px;
 }
 
 .reg__title {
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
-  margin: 40px 0;
+  margin-top: 0;
+  margin-bottom: 40px;
 }
 
 .reg__form {
@@ -42,6 +50,7 @@
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
+  margin-top: 69px;
   padding-top: 13px;
   padding-bottom: 15px;
   cursor: pointer;
@@ -60,4 +69,35 @@
   text-decoration: none;
   color: black;
   margin-left: 6px;
+}
+
+@media screen and (max-width: 456px) {
+  .reg {
+    margin: 0 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reg__logo {
+    margin-top: 56px;
+    margin-bottom: 50px;
+    align-self: center;
+  }
+
+  .reg__title {
+    margin: 0 0 80px 0;
+    text-align: center;
+  }
+
+  .reg__button {
+    margin-top: 157px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .reg__text {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 14px 0 30px;
+  }
 }

@@ -1,12 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
+import NotFound from '../NotFound/NotFound';
 
 import Login from '../Login/Login';
 import Register from '../Register/Register';
@@ -16,7 +14,6 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <Header isLoggedIn={true} />
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/movies' element={<Movies />} />
@@ -24,8 +21,8 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/signin' element={<Login />} />
         <Route path='/signup' element={<Register />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }
