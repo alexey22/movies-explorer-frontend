@@ -10,23 +10,28 @@
   margin-bottom: 40px;
 }
 
+.reg__logo-image {
+  display: block;
+}
+
 .reg__title {
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
-  margin-top: 0;
-  margin-bottom: 40px;
+  margin: 0;
 }
 
 .reg__form {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .reg__label {
   color: #a0a0a0;
   font-size: 10px;
   line-height: 12px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -39,7 +44,17 @@
   background-color: #f9f9f9;
   outline: 0;
   padding: 15px;
-  margin-bottom: 20px;
+}
+
+.reg__input_type_error {
+  color: #ff4062;
+}
+
+.reg__error-massage {
+  color: #ff4062;
+  font-size: 10px;
+  line-height: 12px;
+  margin-top: 10px;
 }
 
 .reg__button {
@@ -84,8 +99,11 @@
     align-self: center;
   }
 
+  .reg__form {
+    margin-top: 60px;
+  }
+
   .reg__title {
-    margin: 0 0 80px 0;
     text-align: center;
   }
 
