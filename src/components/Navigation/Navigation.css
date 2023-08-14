@@ -181,7 +181,11 @@
 
   .nav__close {
     margin: 19px;
-    margin-bottom: 80px;
+    margin-bottom: 125px;
+  }
+
+  .nav__link_type_main-mobile {
+    display: none;
   }
 
   .nav__link_type_movies-mobile {
