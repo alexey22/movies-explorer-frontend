@@ -1,9 +1,25 @@
+import { useEffect } from 'react';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 import './SearchForm.css';
 import searchicon from './search-icon.svg';
+import { useState } from 'react';
 
 function SearchForm() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  });
+
   return (
     <>
       <section className='search-form'>
@@ -17,7 +33,7 @@ function SearchForm() {
             <input className='search-form__input' placeholder='Фильм' />
             <button className='search-form__button'>Найти</button>
 
-            {window.innerWidth > 700 ? (
+            {windowWidth > 700 ? (
               <>
                 <FilterCheckbox />
               </>
@@ -25,7 +41,7 @@ function SearchForm() {
               ''
             )}
           </div>
-          {window.innerWidth <= 700 ? (
+          {windowWidth <= 700 ? (
             <>
               <FilterCheckbox />
             </>

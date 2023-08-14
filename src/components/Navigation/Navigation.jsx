@@ -1,8 +1,23 @@
 import { NavLink } from 'react-router-dom';
 
 import './Navigation.css';
+import { useState, useEffect } from 'react';
 
 function Navigation({ isLoggedIn }) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  });
+
   function handleCloseMenu() {
     document
       .querySelector('.nav__mobile')
@@ -24,7 +39,7 @@ function Navigation({ isLoggedIn }) {
   }
 
   if (isLoggedIn) {
-    if (window.innerWidth > 768) {
+    if (windowWidth > 768) {
       return (
         <nav className='nav'>
           <NavLink to='/movies' className='nav__link nav__link_type_movies'>
