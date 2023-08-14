@@ -6,7 +6,7 @@ import './Register.css';
 
 function Register() {
   return (
-    <section className='reg'>
+    <main className='reg'>
       <Link to='/' className='reg__logo'>
         <img src={logo} alt='Логотип' className='reg__logo-image' />
       </Link>
@@ -15,11 +15,23 @@ function Register() {
         <label className='reg__label' htmlFor='name'>
           Имя
         </label>
-        <input className='reg__input' id='name' type='text' required />
+        <input
+          className='reg__input'
+          id='name'
+          type='text'
+          required
+          placeholder='Имя'
+        />
         <label className='reg__label' htmlFor='email'>
           E-mail
         </label>
-        <input className='reg__input' type='email' required id='email' />
+        <input
+          className='reg__input'
+          type='email'
+          required
+          id='email'
+          placeholder='E-mail'
+        />
         <label className='reg__label' htmlFor='password'>
           Пароль
         </label>
@@ -28,6 +40,7 @@ function Register() {
           type='password'
           required
           id='password'
+          placeholder='Пароль'
         />
         <span className='reg__error-massage'>Что-то пошло не так...</span>
         <button className='reg__button'>Зарегистрироваться</button>
@@ -39,7 +52,7 @@ function Register() {
           Войти
         </Link>
       </div>
-    </section>
+    </main>
   );
 }
 

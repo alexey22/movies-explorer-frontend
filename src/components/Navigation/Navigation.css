@@ -29,6 +29,7 @@
   line-height: 16px;
   padding: 8px 20px;
 }
+
 .nav__link:hover {
   opacity: 0.7;
 }
@@ -81,6 +82,10 @@
   border: 0;
 }
 
+.nav__burger:hover {
+  opacity: 0.7;
+}
+
 .nav__mobile {
   position: fixed;
   z-index: 10;
@@ -110,6 +115,10 @@
   cursor: pointer;
   align-self: flex-end;
   margin-bottom: 85px;
+}
+
+.nav__close:hover {
+  opacity: 0.7;
 }
 
 .nav__link_type_movies-mobile {
@@ -142,7 +151,7 @@
   .nav__mobile-shadow {
     background: rgba(0, 0, 0, 0.3);
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 100vw;
@@ -164,7 +173,7 @@
     font-weight: 500;
   }
 
-  .nav__button {
+  .nav__link_type_button {
     font-size: 10px;
     padding: 5px 12px;
   }

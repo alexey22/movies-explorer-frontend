@@ -22,7 +22,13 @@ function Login() {
         <label className='login__label' htmlFor='email'>
           E-mail
         </label>
-        <input className='login__input' type='email' required id='email' />
+        <input
+          className='login__input'
+          type='email'
+          required
+          id='email'
+          placeholder='E-mail'
+        />
         <label className='login__label' htmlFor='password'>
           Пароль
         </label>
@@ -31,6 +37,7 @@ function Login() {
           type='password'
           required
           id='password'
+          placeholder='Пароль'
         />
         <button className='login__button' onClick={handleLogin}>
           Войти

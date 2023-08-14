@@ -59,10 +59,18 @@ function Navigation({ isLoggedIn }) {
     } else {
       return (
         <nav className='nav'>
-          <button className='nav__burger' onClick={handleOpenMenu}></button>
+          <button
+            className='nav__burger'
+            onClick={handleOpenMenu}
+            type='button'
+          ></button>
           <div className='nav__mobile-shadow'></div>
           <div className='nav__mobile'>
-            <button className='nav__close' onClick={handleCloseMenu} />
+            <button
+              className='nav__close'
+              onClick={handleCloseMenu}
+              type='button'
+            />
             <NavLink
               to='/'
               className='nav__link nav__link_type_movies-mobile nav__link_type_main-mobile'

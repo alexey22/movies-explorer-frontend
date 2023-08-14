@@ -28,9 +28,13 @@ function SearchForm() {
             <img
               className='search-form__icon'
               src={searchicon}
-              alt='search icon'
+              alt='Иконка поиска'
             />
-            <input className='search-form__input' placeholder='Фильм' />
+            <input
+              className='search-form__input'
+              placeholder='Фильм'
+              required
+            />
             <button className='search-form__button'>Найти</button>
 
             {windowWidth > 700 ? (

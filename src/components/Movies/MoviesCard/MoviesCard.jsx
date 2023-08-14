@@ -11,9 +11,11 @@ function MoviesCard({ nameRU, image, duration, trailerLink, isSaved }) {
   return (
     <article className='card'>
       {isSaved ? (
-        <button className='card__saved'></button>
+        <button className='card__saved' type='button'></button>
       ) : (
-        <button className='card__save'>Сохранить</button>
+        <button className='card__save' type='button'>
+          Сохранить
+        </button>
       )}
 
       <a
@@ -25,7 +27,7 @@ function MoviesCard({ nameRU, image, duration, trailerLink, isSaved }) {
         <figure className='card__figure'>
           <img className='card__image' src={image} alt={alt} />
           <figcaption className='card__text'>
-            <h1 className='card__title'>{nameRU}</h1>
+            <h2 className='card__title'>{nameRU}</h2>
             <p className='card__duration'>{minuteToTime(duration)}</p>
           </figcaption>
         </figure>

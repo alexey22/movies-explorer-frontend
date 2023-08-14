@@ -10,6 +10,10 @@
   margin-bottom: 40px;
 }
 
+.reg__logo:hover {
+  opacity: 0.7;
+}
+
 .reg__logo-image {
   display: block;
 }
@@ -71,6 +75,10 @@
   cursor: pointer;
 }
 
+.reg__button:hover {
+  opacity: 0.8;
+}
+
 .reg__text {
   font-size: 14px;
   line-height: 17px;
@@ -84,6 +92,10 @@
   text-decoration: none;
   color: black;
   margin-left: 6px;
+}
+
+.reg__link:hover {
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 456px) {

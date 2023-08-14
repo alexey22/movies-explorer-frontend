@@ -10,6 +10,10 @@
   margin-bottom: 40px;
 }
 
+.login__logo:hover {
+  opacity: 0.7;
+}
+
 .login__title {
   font-size: 24px;
   font-weight: 500;
@@ -56,6 +60,10 @@
   margin-top: 159px;
 }
 
+.login__button:hover {
+  opacity: 0.7;
+}
+
 .login__text {
   font-size: 14px;
   line-height: 17px;
@@ -69,6 +77,10 @@
   text-decoration: none;
   color: black;
   margin-left: 6px;
+}
+
+.login__link:hover {
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 456px) {

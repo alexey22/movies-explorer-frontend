@@ -9,6 +9,16 @@ function Profile() {
   const navigate = useNavigate();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState('Виталий');
+  const [email, setEmail] = useState('pochta@yandex.ru');
+
+  function handleChangeName(e) {
+    setName(e.target.value);
+  }
+
+  function handleChangeEmail(e) {
+    setEmail(e.target.value);
+  }
 
   function handelLogout() {
     navigate('/');
@@ -33,10 +43,18 @@ function Profile() {
   } else {
     controls = (
       <>
-        <button className='profile__edit-button' onClick={handleEdit}>
+        <button
+          className='profile__edit-button'
+          onClick={handleEdit}
+          type='button'
+        >
           Редактировать
         </button>
-        <button className='profile__logout-button' onClick={handelLogout}>
+        <button
+          className='profile__logout-button'
+          onClick={handelLogout}
+          type='button'
+        >
           Выйти из аккаунта
         </button>
       </>
@@ -56,8 +74,12 @@ function Profile() {
             className='profile__input profile__input_no_1'
             type='text'
             id='name'
-            value='Виталий'
+            value={name}
             required
+            placeholder='Имя'
+            minLength='2'
+            maxLength='20'
+            onChange={handleChangeName}
           />
           <div className='profile__line'></div>
           <label className='profile__label profile__label_no-2' htmlFor='email'>
@@ -67,8 +89,12 @@ function Profile() {
             className='profile__input profile__input_no-2'
             type='email'
             id='email'
-            value='pochta@yandex.ru'
+            value={email}
             required
+            placeholder='E-mail'
+            minLength='8'
+            maxLength='20'
+            onChange={handleChangeEmail}
           />
         </form>
         {controls}

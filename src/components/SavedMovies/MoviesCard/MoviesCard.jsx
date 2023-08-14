@@ -10,7 +10,7 @@ function MoviesCard({ nameRU, image, duration, trailerLink, isSaved }) {
 
   return (
     <article className='card'>
-      <button className='card__delete'></button>
+      <button className='card__delete' type='button'></button>
       <a
         className='card__link'
         href={trailerLink}
@@ -20,7 +20,7 @@ function MoviesCard({ nameRU, image, duration, trailerLink, isSaved }) {
         <figure className='card__figure'>
           <img className='card__image' src={image} alt={alt} />
           <figcaption className='card__text'>
-            <h1 className='card__title'>{nameRU}</h1>
+            <h2 className='card__title'>{nameRU}</h2>
             <p className='card__duration'>{minuteToTime(duration)}</p>
           </figcaption>
         </figure>
