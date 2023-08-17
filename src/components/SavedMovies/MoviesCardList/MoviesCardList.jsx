@@ -4,7 +4,7 @@ import './MoviesCardList.css';
 
 import { useState, useEffect } from 'react';
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({ savedMovies }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function MoviesCardList({ movies }) {
   if (windowWidth > 768) {
     return (
       <section className='list-saved'>
-        {movies.map((movie) => (
+        {savedMovies.map((movie) => (
           <MoviesCard {...movie} key={movie.id} />
         ))}
       </section>
@@ -30,7 +30,7 @@ function MoviesCardList({ movies }) {
   } else if (windowWidth > 570) {
     return (
       <section className='list-saved'>
-        {movies.map((movie, index) => {
+        {savedMovies.map((movie, index) => {
           if (index < 3) {
             return <MoviesCard {...movie} key={movie.id} />;
           } else {
@@ -42,7 +42,7 @@ function MoviesCardList({ movies }) {
   } else {
     return (
       <section className='list-saved'>
-        {movies.map((movie, index) => {
+        {savedMovies.map((movie, index) => {
           if (index < 2) {
             return <MoviesCard {...movie} key={movie.id} />;
           } else {

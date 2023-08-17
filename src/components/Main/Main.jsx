@@ -10,10 +10,10 @@ import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolios';
 
-function Main() {
+function Main({ loggedIn }) {
   return (
     <>
-      <Header isLoggedIn={false} />
+      <Header isLoggedIn={loggedIn} />
       <main>
         <Promo />
         <NavTab />

@@ -5,7 +5,7 @@ import './SearchForm.css';
 import searchicon from './search-icon.svg';
 import { useState } from 'react';
 
-function SearchForm() {
+function SearchForm({ searchQuery, setSearchQuery, isShort, setIsShort }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -19,6 +19,11 @@ function SearchForm() {
       window.removeEventListener('resize', handleWindowResize);
     };
   });
+
+  function handleChangeSearchQuery(e) {
+    const query = e.target.value;
+    setSearchQuery(query);
+  }
 
   return (
     <>
@@ -34,12 +39,14 @@ function SearchForm() {
               className='search-form__input'
               placeholder='Фильм'
               required
+              value={searchQuery}
+              onChange={handleChangeSearchQuery}
             />
             <button className='search-form__button'>Найти</button>
 
             {windowWidth > 700 ? (
               <>
-                <FilterCheckbox />
+                <FilterCheckbox isShort={isShort} setIsShort={setIsShort} />
               </>
             ) : (
               ''
@@ -47,7 +54,7 @@ function SearchForm() {
           </div>
           {windowWidth <= 700 ? (
             <>
-              <FilterCheckbox />
+              <FilterCheckbox isShort={isShort} setIsShort={setIsShort} />
             </>
           ) : (
             ''

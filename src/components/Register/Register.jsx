@@ -1,24 +1,47 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from './logo.svg';
 
 import './Register.css';
 
-function Register() {
+function Register({ onRegister }) {
+  const [formValue, setFormValue] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
+
   return (
     <main className='reg'>
       <Link to='/' className='reg__logo'>
         <img src={logo} alt='Логотип' className='reg__logo-image' />
       </Link>
       <h1 className='reg__title'>Добро пожаловать!</h1>
-      <form className='reg__form'>
+      <form
+        onSubmit={(e) =>
+          onRegister(e, formValue.name, formValue.email, formValue.password)
+        }
+        className='reg__form'
+      >
         <label className='reg__label' htmlFor='name'>
           Имя
         </label>
         <input
+          value={formValue.name}
+          onChange={handleChange}
           className='reg__input'
-          id='name'
           type='text'
+          id='name'
+          name='name'
           required
           placeholder='Имя'
         />
@@ -26,9 +49,12 @@ function Register() {
           E-mail
         </label>
         <input
+          value={formValue.email}
+          onChange={handleChange}
           className='reg__input'
-          type='email'
           required
+          type='email'
+          name='email'
           id='email'
           placeholder='E-mail'
         />
@@ -36,14 +62,19 @@ function Register() {
           Пароль
         </label>
         <input
+          value={formValue.password}
+          onChange={handleChange}
           className='reg__input reg__input_type_error'
-          type='password'
           required
+          type='password'
           id='password'
+          name='password'
           placeholder='Пароль'
         />
         <span className='reg__error-massage'>Что-то пошло не так...</span>
-        <button className='reg__button'>Зарегистрироваться</button>
+        <button type='submit' className='reg__button'>
+          Зарегистрироваться
+        </button>
       </form>
 
       <div className='reg__text'>

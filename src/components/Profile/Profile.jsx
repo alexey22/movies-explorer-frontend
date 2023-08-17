@@ -1,34 +1,32 @@
 import Header from '../Header/Header';
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import './Profile.css';
 
-function Profile() {
-  const navigate = useNavigate();
-
+function Profile({ onEditProfile, onSignOut, userData, onUpdateUser }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState('Виталий');
-  const [email, setEmail] = useState('pochta@yandex.ru');
 
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
+  const [formValue, setFormValue] = useState({
+    name: userData.name,
+    email: userData.email,
+  });
 
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-  }
-
-  function handelLogout() {
-    navigate('/');
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (isEditing)
+      setFormValue({
+        ...formValue,
+        [name]: value,
+      });
+  };
 
   function handleEdit() {
     setIsEditing(true);
   }
 
-  function handleSave() {
+  function handleSave(e) {
+    onUpdateUser(e, formValue);
     setIsEditing(false);
   }
 
@@ -36,7 +34,7 @@ function Profile() {
 
   if (isEditing) {
     controls = (
-      <button className='profile__save-button' onClick={handleSave}>
+      <button className='profile__save-button' type='submit'>
         Сохранить
       </button>
     );
@@ -52,7 +50,7 @@ function Profile() {
         </button>
         <button
           className='profile__logout-button'
-          onClick={handelLogout}
+          onClick={onSignOut}
           type='button'
         >
           Выйти из аккаунта
@@ -65,39 +63,53 @@ function Profile() {
     <>
       <Header isLoggedIn={true} />
       <main className='profile'>
-        <h1 className='profile__title'>Привет, Виталий!</h1>
-        <form className='profile__form'>
-          <label className='profile__label profile__label_no-1' htmlFor='name'>
-            Имя
-          </label>
-          <input
-            className='profile__input profile__input_no_1'
-            type='text'
-            id='name'
-            value={name}
-            required
-            placeholder='Имя'
-            minLength='2'
-            maxLength='20'
-            onChange={handleChangeName}
-          />
-          <div className='profile__line'></div>
-          <label className='profile__label profile__label_no-2' htmlFor='email'>
-            E-mail
-          </label>
-          <input
-            className='profile__input profile__input_no-2'
-            type='email'
-            id='email'
-            value={email}
-            required
-            placeholder='E-mail'
-            minLength='8'
-            maxLength='20'
-            onChange={handleChangeEmail}
-          />
+        <h1 className='profile__title'>Привет, {userData.name}!</h1>
+        <form
+          onSubmit={(e) => handleSave(e, formValue.name, formValue.email)}
+          className='profile__form'
+        >
+          <div className='profile__input-container'>
+            <label
+              className='profile__label profile__label_no-1'
+              htmlFor='name'
+            >
+              Имя
+            </label>
+            <input
+              className='profile__input profile__input_no_1'
+              type='text'
+              id='name'
+              name='name'
+              value={formValue.name}
+              onChange={handleChange}
+              required
+              placeholder='Имя'
+              minLength='2'
+              maxLength='20'
+            />
+          </div>
+          <div className='profile__input-container'>
+            <label
+              className='profile__label profile__label_no-2'
+              htmlFor='email'
+            >
+              E-mail
+            </label>
+            <input
+              className='profile__input profile__input_no-2'
+              type='email'
+              id='email'
+              name='email'
+              value={formValue.email}
+              onChange={handleChange}
+              required
+              placeholder='E-mail'
+              minLength='8'
+              maxLength='20'
+            />
+          </div>
+          {controls}
         </form>
-        {controls}
       </main>
     </>
   );

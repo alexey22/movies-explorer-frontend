@@ -1,15 +1,27 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import logo from './logo.svg';
 
 import './Login.css';
 
-function Login() {
-  const navigate = useNavigate();
+function Login({ onLogin, tokenCheck }) {
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
-  function handleLogin() {
-    navigate('/movies');
-  }
+  const [formValue, setFormValue] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
 
   return (
     <main className='login'>
@@ -18,12 +30,18 @@ function Login() {
       </NavLink>
 
       <h1 className='login__title'>Рады видеть!</h1>
-      <form className='login__form'>
+      <form
+        onSubmit={(e) => onLogin(e, formValue.email, formValue.password)}
+        className='login__form'
+      >
         <label className='login__label' htmlFor='email'>
           E-mail
         </label>
         <input
+          onChange={handleChange}
+          value={formValue.email}
           className='login__input'
+          name='email'
           type='email'
           required
           id='email'
@@ -33,13 +51,16 @@ function Login() {
           Пароль
         </label>
         <input
+          onChange={handleChange}
+          value={formValue.password}
           className='login__input'
           type='password'
+          name='password'
           required
           id='password'
           placeholder='Пароль'
         />
-        <button className='login__button' onClick={handleLogin}>
+        <button className='login__button' type='submit'>
           Войти
         </button>
       </form>

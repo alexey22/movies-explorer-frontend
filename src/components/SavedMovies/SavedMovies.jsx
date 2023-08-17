@@ -6,40 +6,23 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 
 import './SavedMovies.css';
 
-function Movies() {
-  const movies = [
-    {
-      id: 1,
-      nameRU: '«Роллинг Стоунз» в изгнании',
-      duration: 61,
-      image:
-        'https://api.nomoreparties.co/uploads/stones_in_exile_b2f1b8f4b7.jpeg',
-      trailerLink: 'https://www.ya.ru',
-      isSaved: true,
-    },
-    {
-      id: 2,
-      nameRU: "All Tomorrow's Parties",
-      duration: 82,
-      image:
-        'https://api.nomoreparties.co/uploads/all_tommoros_parties_33a125248d.jpeg',
-      trailerLink: 'https://www.ya.ru',
-    },
-    {
-      id: 3,
-      nameRU: ' Без обратного пути',
-      duration: 104,
-      image: 'https://api.nomoreparties.co/uploads/blur_a43fcf463d.jpeg',
-      trailerLink: 'https://www.ya.ru',
-    },
-  ];
+import { useEffect } from 'react';
+
+import MainApi from '../../utils/MainApi';
+
+function Movies({ savedMovies, setSavedMovies }) {
+  useEffect(() => {
+    MainApi.getSavedMovies().then((movies) => {
+      setSavedMovies(movies);
+    });
+  }, []);
 
   return (
     <>
       <Header isLoggedIn={true} />
       <main className='movies'>
         <SearchForm />
-        <MoviesCardList movies={movies} />
+        <MoviesCardList savedMovies={savedMovies} />
       </main>
       <Footer />
     </>
