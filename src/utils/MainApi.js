@@ -67,7 +67,7 @@ class Api {
 }
 
 const MainApi = new Api({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.musli.nomoredomains.xyz',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json',
