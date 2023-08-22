@@ -22,20 +22,19 @@
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 40px;
 }
 
 .reg__form {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
 }
 
 .reg__label {
   color: #a0a0a0;
   font-size: 10px;
   line-height: 12px;
-  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -48,17 +47,29 @@
   background-color: #f9f9f9;
   outline: 0;
   padding: 15px;
+  margin-bottom: 0px;
 }
 
 .reg__input_type_error {
   color: #ff4062;
+  margin-bottom: 3px;
 }
 
 .reg__error-massage {
   color: #ff4062;
   font-size: 10px;
   line-height: 12px;
-  margin-top: 10px;
+  margin-bottom: 6px;
+  min-height: 12px;
+}
+
+.reg__error {
+  color: #ff004c;
+  font-size: 11px;
+  line-height: 13px;
+  padding-top: 44px;
+  text-align: center;
+  min-height: 13px;
 }
 
 .reg__button {
@@ -69,7 +80,7 @@
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
-  margin-top: 69px;
+  margin-top: 20px;
   padding-top: 13px;
   padding-bottom: 15px;
   cursor: pointer;
@@ -77,6 +88,15 @@
 
 .reg__button:hover {
   opacity: 0.8;
+}
+
+.reg__button_disabled {
+  opacity: 0.5;
+  cursor: inherit;
+}
+
+.reg__button_disabled:hover {
+  opacity: 0.5;
 }
 
 .reg__text {
@@ -98,6 +118,12 @@
   opacity: 0.7;
 }
 
+@media screen and (max-width: 768px) {
+  .reg__logo {
+    margin-top: 232px;
+  }
+}
+
 @media screen and (max-width: 456px) {
   .reg {
     margin: 0 30px;
@@ -117,10 +143,14 @@
 
   .reg__title {
     text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .reg__error {
+    margin-top: 90px;
   }
 
   .reg__button {
-    margin-top: 157px;
     font-size: 12px;
     line-height: 15px;
   }

@@ -25,7 +25,7 @@
 .footer__container {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0;
+  padding: 20px 0;
 }
 
 .footer__copyright {
@@ -95,5 +95,6 @@
     grid-template-areas: 'links' 'copyright';
     justify-content: center;
     margin: 0;
+    padding: 0;
   }
 }

@@ -15,11 +15,11 @@ class Api {
     };
   }
 
-  _handleResponse(res, errMessage) {
+  _handleResponse(res) {
     if (res.ok) {
       return res.json();
     } else {
-      return Promise.reject(errMessage);
+      return Promise.reject(res.status);
     }
   }
 
@@ -27,9 +27,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: { ...this._headers, 'Content-Type': 'application/json' },
-    }).then((res) =>
-      this._handleResponse(res, 'Ошибка при получении данных пользователя')
-    );
+    }).then((res) => this._handleResponse(res));
   }
 
   setUserInfo({ name, email }) {
@@ -40,27 +38,21 @@ class Api {
         name: name,
         email: email,
       }),
-    }).then((res) =>
-      this._handleResponse(res, 'Ошибка при сохранении данных пользователя')
-    );
+    }).then((res) => this._handleResponse(res));
   }
 
   getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
       headers: this._headers,
-    }).then((res) =>
-      this._handleResponse(res, 'Ошибка при загрузке сохраненных фильмов')
-    );
+    }).then((res) => this._handleResponse(res));
   }
 
   deleteMovie(movieId) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: 'DELETE',
       headers: this._headers,
-    }).then((res) =>
-      this._handleResponse(res, 'Ошибка при удалении фильма из сохраненных')
-    );
+    }).then((res) => this._handleResponse(res));
   }
 
   saveMovie(movie) {
@@ -70,7 +62,7 @@ class Api {
       body: JSON.stringify({
         ...movie,
       }),
-    }).then((res) => this._handleResponse(res, 'Ошибка при сохранении фильма'));
+    }).then((res) => this._handleResponse(res));
   }
 }
 

@@ -1,8 +1,7 @@
-import MainApi from '../../../utils/MainApi';
 import './MoviesCard.css';
 
-function MoviesCard({ movie }) {
-  const { nameRU, image, duration, trailerLink, isSaved } = movie;
+function MoviesCard({ movie, isSaved, onSaveMovie, onDeleteSavedMovie }) {
+  const { nameRU, image, duration, trailerLink } = movie;
 
   const alt = `Кадр из фильма ${nameRU}`;
 
@@ -11,28 +10,20 @@ function MoviesCard({ movie }) {
     return `${hours > 0 ? `${hours}ч` : ''} ${min % 60}м`;
   }
 
-  function onSaveMovie() {
-    MainApi.saveMovie({
-      country: movie.country,
-      director: movie.director,
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description,
-      image: 'https://api.nomoreparties.co' + movie.image.url,
-      trailerLink: movie.trailerLink,
-      thumbnail: 'https://api.nomoreparties.co' + movie.image.url,
-      movieId: movie.id,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
-    });
-  }
-
   return (
     <article className='card'>
       {isSaved ? (
-        <button className='card__saved' type='button'></button>
+        <button
+          className='card__saved'
+          type='button'
+          onClick={() => onDeleteSavedMovie(movie.id)}
+        />
       ) : (
-        <button className='card__save' type='button' onClick={onSaveMovie}>
+        <button
+          className='card__save'
+          type='button'
+          onClick={() => onSaveMovie(movie)}
+        >
           Сохранить
         </button>
       )}

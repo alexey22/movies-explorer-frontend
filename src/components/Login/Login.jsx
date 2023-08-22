@@ -5,8 +5,11 @@ import logo from './logo.svg';
 
 import './Login.css';
 
-function Login({ onLogin, tokenCheck }) {
+import validate from '../../utils/validate';
+
+function Login({ onLogin, tokenCheck, loginError, setLoginError }) {
   useEffect(() => {
+    setLoginError();
     tokenCheck();
   }, []);
 
@@ -15,12 +18,28 @@ function Login({ onLogin, tokenCheck }) {
     password: '',
   });
 
+  const [isValid, setIsValid] = useState({
+    email: false,
+    password: false,
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    setLoginError();
+
     setFormValue({
       ...formValue,
       [name]: value,
     });
+
+    if (name === 'email') {
+      setIsValid({ ...isValid, email: validate.Email(value) });
+    }
+
+    if (name === 'password') {
+      setIsValid({ ...isValid, password: validate.Password(value) });
+    }
   };
 
   return (
@@ -40,27 +59,53 @@ function Login({ onLogin, tokenCheck }) {
         <input
           onChange={handleChange}
           value={formValue.email}
-          className='login__input'
+          className={
+            isValid.email
+              ? 'login__input'
+              : 'login__input login__input_type_error'
+          }
           name='email'
           type='email'
           required
           id='email'
           placeholder='E-mail'
         />
+        <span className='login__error-message login__error-message_type_email'>
+          {!isValid.email ? 'Некорректный E-mail' : ' '}
+        </span>
+
         <label className='login__label' htmlFor='password'>
           Пароль
         </label>
         <input
           onChange={handleChange}
           value={formValue.password}
-          className='login__input'
+          className={
+            isValid.password
+              ? 'login__input'
+              : 'login__input login__input_type_error'
+          }
           type='password'
           name='password'
           required
           id='password'
           placeholder='Пароль'
         />
-        <button className='login__button' type='submit'>
+        <span className='login__error-message login__error-message_type_password'>
+          {!isValid.password ? 'Минимальная длина пароля 8 символов' : ' '}
+        </span>
+
+        <span className='login__error'>{loginError}</span>
+
+        <button
+          className={
+            isValid.email && isValid.password
+              ? 'login__button '
+              : 'login__button login__button_disabled'
+          }
+          disabled={!(isValid.email && isValid.password)}
+          type='submit'
+        >
           Войти
         </button>
       </form>

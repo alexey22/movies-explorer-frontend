@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -29,6 +29,10 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
+  const [loginError, setLoginError] = useState();
+  const [registerError, setRegisterError] = useState();
+  const [profileError, setProfileError] = useState();
+
   const navigate = useNavigate();
 
   const handleLogin = ({ name, email }) => {
@@ -54,34 +58,53 @@ function App() {
   const onLogin = (e, email, password) => {
     e.preventDefault();
 
-    auth.authorize({ email, password }).then((data) => {
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('name', data.name);
-        localStorage.setItem('email', data.email);
-        handleLogin({ name: data.name, email: data.email });
-        navigate('/movies', { replace: true });
-      }
-    });
-    // .catch((err) => {
-    //   console.log(err);
-    //   setInfoTooltipState({ open: true, success: false });
-    // });
+    auth
+      .authorize({ email, password })
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('name', data.name);
+          localStorage.setItem('email', data.email);
+          handleLogin({ name: data.name, email: data.email });
+          navigate('/movies', { replace: true });
+        }
+      })
+      .catch((err) => {
+        switch (err) {
+          case 400:
+            setLoginError('Вы ввели неправильный логин или пароль.');
+            break;
+          case 500:
+            setLoginError('500 На сервере произошла ошибка.');
+            break;
+          default:
+            setLoginError('Вы ввели неправильный логин или пароль.');
+            break;
+        }
+      });
   };
 
   const onRegister = (e, name, email, password) => {
     e.preventDefault();
 
-    auth.register({ name, email, password }).then(() => {
-      navigate('/signin');
-    });
-    // .then(() => {
-    //   setInfoTooltipState({ open: true, success: true });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   setInfoTooltipState({ open: true, success: false });
-    // });
+    auth
+      .register({ name, email, password })
+      .then(() => {
+        navigate('/signin');
+      })
+      .catch((err) => {
+        switch (err) {
+          case 409:
+            setRegisterError('Пользователь с таким email уже существует.');
+            break;
+          case 500:
+            setRegisterError('500 На сервере произошла ошибка.');
+            break;
+          default:
+            setRegisterError('При регистрации пользователя произошла ошибка.');
+            break;
+        }
+      });
   };
 
   const handleUpdateUser = (e, { name, email }) => {
@@ -90,24 +113,37 @@ function App() {
     MainApi.setUserInfo({ name, email })
       .then((user) => {
         setCurrentUser(user);
-        setUserData({ name, email });
+        setUserData({ name: user.name, email: user.email });
+        localStorage.name = user.name;
+        localStorage.email = user.email;
       })
-      .catch((errMessage) => alert(errMessage));
-
-    //auth.register({ name, email, password });
-    // .then(() => {
-    //   setInfoTooltipState({ open: true, success: true });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   setInfoTooltipState({ open: true, success: false });
-    // });
+      .catch((err) => {
+        switch (err) {
+          case 409:
+            setProfileError('Пользователь с таким email уже существует.');
+            break;
+          case 500:
+            setProfileError('500 На сервере произошла ошибка.');
+            break;
+          default:
+            setProfileError('При обновлении профиля произошла ошибка.');
+            break;
+        }
+      });
   };
 
   function handleSignOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('name');
     localStorage.removeItem('email');
+    localStorage.removeItem('movies');
+
+    localStorage.removeItem('findedMovies');
+    localStorage.removeItem('searchQuery');
+    localStorage.removeItem('isShort');
+
+    localStorage.removeItem('savedSearchQuery');
+    localStorage.removeItem('isShortSaved');
     setUserData({ name: '', email: '' });
     setLoggedIn(false);
     navigate('/', { replace: true });
@@ -154,14 +190,32 @@ function App() {
               onUpdateUser={handleUpdateUser}
               onSignOut={handleSignOut}
               userData={userData}
+              profileError={profileError}
+              setProfileError={setProfileError}
             />
           }
         />
         <Route
           path='/signin'
-          element={<Login onLogin={onLogin} tokenCheck={tokenCheck} />}
+          element={
+            <Login
+              onLogin={onLogin}
+              tokenCheck={tokenCheck}
+              loginError={loginError}
+              setLoginError={setLoginError}
+            />
+          }
         />
-        <Route path='/signup' element={<Register onRegister={onRegister} />} />
+        <Route
+          path='/signup'
+          element={
+            <Register
+              onRegister={onRegister}
+              registerError={registerError}
+              setRegisterError={setRegisterError}
+            />
+          }
+        />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </CurrentUserContext.Provider>

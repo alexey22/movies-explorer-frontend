@@ -1,8 +1,13 @@
-import MainApi from '../../../utils/MainApi';
-
 import './MoviesCard.css';
 
-function MoviesCard({ nameRU, image, duration, trailerLink, isSaved, _id }) {
+function MoviesCard({
+  nameRU,
+  image,
+  duration,
+  trailerLink,
+  _id,
+  onDeleteSavedMovie,
+}) {
   const alt = `Кадр из фильма ${nameRU}`;
 
   function minuteToTime(min) {
@@ -10,14 +15,10 @@ function MoviesCard({ nameRU, image, duration, trailerLink, isSaved, _id }) {
     return `${hours > 0 ? `${hours}ч` : ''} ${min % 60}м`;
   }
 
-  function handleDeleteCard() {
-    MainApi.deleteMovie(_id);
-  }
-
   return (
     <article className='card'>
       <button
-        onClick={handleDeleteCard}
+        onClick={() => onDeleteSavedMovie(_id)}
         className='card__delete'
         type='button'
       />

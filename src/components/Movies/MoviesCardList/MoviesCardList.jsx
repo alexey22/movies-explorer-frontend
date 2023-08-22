@@ -4,54 +4,63 @@ import './MoviesCardList.css';
 
 import { useState, useEffect } from 'react';
 
-function MoviesCardList({ movies, savedMovies }) {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+import MainApi from '../../../utils/MainApi';
 
-  useEffect(() => {
-    const handleWindowResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleWindowResize);
-
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    };
-  });
-
-  if (windowWidth > 768) {
-    return (
-      <section className='list'>
-        {movies.map((movie) => (
-          <MoviesCard movie={movie} key={movie.id} />
-        ))}
-      </section>
-    );
-  } else if (windowWidth > 570) {
-    return (
-      <section className='list'>
-        {movies.map((movie, index) => {
-          if (index < 8) {
-            return <MoviesCard movie={movie} key={movie.id} />;
-          } else {
-            return '';
-          }
-        })}
-      </section>
-    );
-  } else {
-    return (
-      <section className='list'>
-        {movies.map((movie, index) => {
-          if (index < 5) {
-            return <MoviesCard movie={movie} key={movie.id} />;
-          } else {
-            return '';
-          }
-        })}
-      </section>
-    );
+function MoviesCardList({ movies, savedMovies, setSavedMovies, displayCount }) {
+  function handleSaveMovie(movie) {
+    MainApi.saveMovie({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: 'https://api.nomoreparties.co' + movie.image.url,
+      trailerLink: movie.trailerLink,
+      thumbnail: 'https://api.nomoreparties.co' + movie.image.url,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    }).then((savedMovie) => setSavedMovies([...savedMovies, savedMovie]));
   }
+
+  function handleDeleteSavedMovie(id) {
+    const movieForDelete = savedMovies.find(
+      (savedMovie) => (savedMovie.movieId = id)
+    );
+    const movieForDeleteId = movieForDelete._id;
+
+    MainApi.deleteMovie(movieForDeleteId).then((deletedMovieInfo) => {
+      if (deletedMovieInfo.deletedCount === 1) {
+        setSavedMovies(
+          savedMovies.filter(
+            (savedMovie) => savedMovie._id !== movieForDeleteId
+          )
+        );
+      }
+    });
+  }
+
+  return (
+    <section className='list'>
+      {movies.map((movie, index) => {
+        if (index < displayCount) {
+          return (
+            <MoviesCard
+              movie={movie}
+              key={movie.id}
+              isSaved={savedMovies.some(
+                (savedMovie) => savedMovie.movieId === movie.id
+              )}
+              onSaveMovie={handleSaveMovie}
+              onDeleteSavedMovie={handleDeleteSavedMovie}
+            />
+          );
+        } else {
+          return '';
+        }
+      })}
+    </section>
+  );
 }
 
 export default MoviesCardList;

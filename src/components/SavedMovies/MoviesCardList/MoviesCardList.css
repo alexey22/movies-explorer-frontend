@@ -4,12 +4,10 @@
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   column-gap: 30px;
   row-gap: 44px;
-  margin-bottom: 228px;
 }
 
 @media screen and (max-width: 1000px) {
   .list-saved {
-    /* grid-template-columns: repeat(2, 1fr); */
     row-gap: 20px;
     margin-bottom: 150px;
   }
@@ -18,7 +16,6 @@
 @media screen and (max-width: 570px) {
   .list-saved {
     padding-top: 40px;
-    /* grid-template-columns: 1fr; */
     row-gap: 20px;
     margin-bottom: 135px;
   }

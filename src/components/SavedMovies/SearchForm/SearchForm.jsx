@@ -5,7 +5,13 @@ import './SearchForm.css';
 import searchicon from './search-icon.svg';
 import { useState } from 'react';
 
-function SearchForm() {
+function SearchForm({
+  searchQuery,
+  setSearchQuery,
+  isShort,
+  setIsShort,
+  onSubmit,
+}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -20,10 +26,21 @@ function SearchForm() {
     };
   });
 
+  function handleChangeSearchQuery(e) {
+    const query = e.target.value;
+    setSearchQuery(query);
+  }
+
   return (
     <>
       <section className='search-form'>
-        <form className='search-form__form'>
+        <form
+          className='search-form__form'
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit();
+          }}
+        >
           <div className='search-form__container'>
             <img
               className='search-form__icon'
@@ -34,12 +51,16 @@ function SearchForm() {
               className='search-form__input'
               placeholder='Фильм'
               required
+              value={searchQuery}
+              onChange={handleChangeSearchQuery}
             />
-            <button className='search-form__button'>Найти</button>
+            <button className='search-form__button' type='submit'>
+              Найти
+            </button>
 
             {windowWidth > 700 ? (
               <>
-                <FilterCheckbox />
+                <FilterCheckbox isShort={isShort} setIsShort={setIsShort} />
               </>
             ) : (
               ''
@@ -47,7 +68,7 @@ function SearchForm() {
           </div>
           {windowWidth <= 700 ? (
             <>
-              <FilterCheckbox />
+              <FilterCheckbox isShort={isShort} setIsShort={setIsShort} />
             </>
           ) : (
             ''

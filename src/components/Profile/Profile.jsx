@@ -1,16 +1,31 @@
 import Header from '../Header/Header';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './Profile.css';
 
-function Profile({ onEditProfile, onSignOut, userData, onUpdateUser }) {
+import validate from '../../utils/validate';
+
+function Profile({
+  onSignOut,
+  userData,
+  onUpdateUser,
+  profileError,
+  setProfileError,
+}) {
   const [isEditing, setIsEditing] = useState(false);
 
   const [formValue, setFormValue] = useState({
     name: userData.name,
     email: userData.email,
   });
+
+  const [isValid, setIsValid] = useState({
+    name: true,
+    email: true,
+  });
+
+  useEffect(() => setProfileError(), []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,10 +34,19 @@ function Profile({ onEditProfile, onSignOut, userData, onUpdateUser }) {
         ...formValue,
         [name]: value,
       });
+
+    if (name === 'name') {
+      setIsValid({ ...isValid, name: validate.Name(value) });
+    }
+
+    if (name === 'email') {
+      setIsValid({ ...isValid, email: validate.Email(value) });
+    }
   };
 
   function handleEdit() {
     setIsEditing(true);
+    setProfileError();
   }
 
   function handleSave(e) {
@@ -34,7 +58,24 @@ function Profile({ onEditProfile, onSignOut, userData, onUpdateUser }) {
 
   if (isEditing) {
     controls = (
-      <button className='profile__save-button' type='submit'>
+      <button
+        disabled={
+          !(isValid.name && isValid.email) ||
+          (formValue.name === userData.name &&
+            formValue.email === userData.email)
+        }
+        className={
+          isValid.name &&
+          isValid.email &&
+          !(
+            formValue.name === userData.name &&
+            formValue.email === userData.email
+          )
+            ? 'profile__save-button'
+            : 'profile__save-button profile__save-button_disabled'
+        }
+        type='submit'
+      >
         Сохранить
       </button>
     );
@@ -76,7 +117,12 @@ function Profile({ onEditProfile, onSignOut, userData, onUpdateUser }) {
               Имя
             </label>
             <input
-              className='profile__input profile__input_no_1'
+              disabled={!isEditing}
+              className={
+                isValid.name
+                  ? 'profile__input profile__input_no_1'
+                  : 'profile__input profile__input_no_1 profile__input_type_error'
+              }
               type='text'
               id='name'
               name='name'
@@ -96,7 +142,12 @@ function Profile({ onEditProfile, onSignOut, userData, onUpdateUser }) {
               E-mail
             </label>
             <input
-              className='profile__input profile__input_no-2'
+              disabled={!isEditing}
+              className={
+                isValid.email
+                  ? 'profile__input profile__input_no_2'
+                  : 'profile__input profile__input_no_2 profile__input_type_error'
+              }
               type='email'
               id='email'
               name='email'
@@ -108,6 +159,7 @@ function Profile({ onEditProfile, onSignOut, userData, onUpdateUser }) {
               maxLength='20'
             />
           </div>
+          <span className='profile__error'>{profileError}</span>
           {controls}
         </form>
       </main>
