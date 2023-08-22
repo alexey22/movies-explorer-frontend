@@ -15,9 +15,10 @@ function Register({ onRegister, registerError, setRegisterError }) {
   });
 
   const [isValid, setIsValid] = useState({
-    name: false,
-    email: false,
-    password: false,
+    name: true,
+    email: true,
+    password: true,
+    initial: true,
   });
 
   useEffect(() => {
@@ -35,15 +36,19 @@ function Register({ onRegister, registerError, setRegisterError }) {
     });
 
     if (name === 'name') {
-      setIsValid({ ...isValid, name: validate.Name(value) });
+      setIsValid({ ...isValid, name: validate.Name(value), initial: false });
     }
 
     if (name === 'email') {
-      setIsValid({ ...isValid, email: validate.Email(value) });
+      setIsValid({ ...isValid, email: validate.Email(value), initial: false });
     }
 
     if (name === 'password') {
-      setIsValid({ ...isValid, password: validate.Password(value) });
+      setIsValid({
+        ...isValid,
+        password: validate.Password(value),
+        initial: false,
+      });
     }
   };
 
@@ -121,11 +126,17 @@ function Register({ onRegister, registerError, setRegisterError }) {
         <button
           type='submit'
           className={
-            isValid.name && isValid.email && isValid.password
+            isValid.name &&
+            isValid.email &&
+            isValid.password &&
+            !isValid.initial
               ? 'reg__button '
               : 'reg__button reg__button_disabled'
           }
-          disabled={!(isValid.name && isValid.email && isValid.password)}
+          disabled={
+            !(isValid.name && isValid.email && isValid.password) ||
+            isValid.initial
+          }
         >
           Зарегистрироваться
         </button>

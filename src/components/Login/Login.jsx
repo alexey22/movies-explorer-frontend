@@ -19,8 +19,9 @@ function Login({ onLogin, tokenCheck, loginError, setLoginError }) {
   });
 
   const [isValid, setIsValid] = useState({
-    email: false,
-    password: false,
+    email: true,
+    password: true,
+    initial: true,
   });
 
   const handleChange = (e) => {
@@ -34,11 +35,15 @@ function Login({ onLogin, tokenCheck, loginError, setLoginError }) {
     });
 
     if (name === 'email') {
-      setIsValid({ ...isValid, email: validate.Email(value) });
+      setIsValid({ ...isValid, email: validate.Email(value), initial: false });
     }
 
     if (name === 'password') {
-      setIsValid({ ...isValid, password: validate.Password(value) });
+      setIsValid({
+        ...isValid,
+        password: validate.Password(value),
+        initial: false,
+      });
     }
   };
 
@@ -99,11 +104,11 @@ function Login({ onLogin, tokenCheck, loginError, setLoginError }) {
 
         <button
           className={
-            isValid.email && isValid.password
+            isValid.email && isValid.password && !isValid.initial
               ? 'login__button '
               : 'login__button login__button_disabled'
           }
-          disabled={!(isValid.email && isValid.password)}
+          disabled={!(isValid.email && isValid.password) || isValid.initial}
           type='submit'
         >
           Войти
