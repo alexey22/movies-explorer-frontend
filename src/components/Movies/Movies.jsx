@@ -8,6 +8,7 @@ import Preloader from '../Preloader/Preloader';
 
 import MoviesApi from '../../utils/MoviesApi';
 import MainApi from '../../utils/MainApi';
+import getFilteredMovies from '../../utils/getFilteredMovies';
 
 import './Movies.css';
 
@@ -29,8 +30,8 @@ function Movies({ movies, setMovies, savedMovies, setSavedMovies }) {
   const [isSend, setIsSend] = useState(false);
 
   useEffect(() => {
-    setFindedMovies(movies.filter((movie) => !isShort || movie.duration < 40));
-  }, [isShort, movies]);
+    setFindedMovies(getFilteredMovies(movies, searchQuery, isShort));
+  }, [isShort]);
 
   useEffect(() => {
     setFindedMovies([]);
@@ -71,43 +72,47 @@ function Movies({ movies, setMovies, savedMovies, setSavedMovies }) {
     setDisplayCount(displayCount + (window.innerWidth > 1010 ? 3 : 2));
   }
 
-  function handleSubmit() {
+  function handleSubmit(movieTitle) {
     setDisplayCount(
       window.innerWidth > 1010 ? 12 : window.innerWidth > 629 ? 8 : 5
     );
-
-    setMovies([]);
     setFindedMovies([]);
 
-    setIsLoading(true);
+    setSearchQuery(movieTitle);
+    localStorage.setItem('searchQuery', movieTitle);
 
-    localStorage.setItem('searchQuery', searchQuery);
-
-    MoviesApi.getMovies().then((loadMovies) => {
-      const _movies = loadMovies.filter(
-        (movie) =>
-          movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setMovies(_movies);
-      localStorage.setItem('movies', JSON.stringify(_movies));
-
-      const _findedMovies = loadMovies.filter(
-        (movie) =>
-          (!isShort || movie.duration < 40) &&
-          (movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase()))
+    if (localStorage.movies) {
+      setIsLoading(true);
+      setMovies(JSON.parse(localStorage.movies));
+      const _findedMovies = getFilteredMovies(
+        JSON.parse(localStorage.movies),
+        movieTitle,
+        isShort
       );
       setFindedMovies(_findedMovies);
       localStorage.setItem('findedMovies', JSON.stringify(_findedMovies));
-
       setIsLoading(false);
+    } else {
+      setIsLoading(true);
+      MoviesApi.getMovies().then((loadedMovies) => {
+        setMovies(loadedMovies);
+        localStorage.setItem('movies', JSON.stringify(loadedMovies));
 
-      setIsSend(true);
-    });
+        const _findedMovies = getFilteredMovies(
+          loadedMovies,
+          movieTitle,
+          isShort
+        );
+        setFindedMovies(_findedMovies);
+        localStorage.setItem('findedMovies', JSON.stringify(_findedMovies));
+        setIsLoading(false);
+      });
+    }
 
-    MainApi.getSavedMovies().then((movies) => {
-      setSavedMovies(movies);
+    setIsSend(true);
+
+    MainApi.getSavedMovies().then((loadedMovies) => {
+      setSavedMovies(loadedMovies);
     });
   }
 

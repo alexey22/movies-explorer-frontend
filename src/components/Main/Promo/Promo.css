@@ -1,4 +1,8 @@
 .promo {
+  background-color: #f3c1f8;
+}
+
+.promo__container {
   background-image: url('./promo-pic.svg');
   background-color: #f3c1f8;
   background-repeat: no-repeat;
@@ -28,7 +32,7 @@
     padding-bottom: 342px;
   }
 
-  .promo {
+  .promo__container {
     background-size: 320px;
     background-position: top 224px left 50%;
   }
@@ -51,7 +55,7 @@
     padding-bottom: 246px;
   }
 
-  .promo {
+  .promo__container {
     background-position: top 142px left 50%;
     background-size: 248px;
   }

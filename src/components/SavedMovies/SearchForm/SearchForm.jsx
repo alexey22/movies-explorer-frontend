@@ -5,15 +5,10 @@ import './SearchForm.css';
 import searchicon from './search-icon.svg';
 import { useState } from 'react';
 
-function SearchForm({
-  searchQuery,
-  setSearchQuery,
-  isShort,
-  setIsShort,
-  onSubmit,
-}) {
+function SearchForm({ searchQuery, isShort, setIsShort, onSubmit }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const [movieTitle, setMovieTitle] = useState(searchQuery);
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowWidth(window.innerWidth);
@@ -26,9 +21,9 @@ function SearchForm({
     };
   });
 
-  function handleChangeSearchQuery(e) {
+  function handleChageMovieTitle(e) {
     const query = e.target.value;
-    setSearchQuery(query);
+    setMovieTitle(query);
   }
 
   return (
@@ -38,7 +33,7 @@ function SearchForm({
           className='search-form__form'
           onSubmit={(e) => {
             e.preventDefault();
-            onSubmit();
+            onSubmit(movieTitle);
           }}
         >
           <div className='search-form__container'>
@@ -51,8 +46,8 @@ function SearchForm({
               className='search-form__input'
               placeholder='Фильм'
               required
-              value={searchQuery}
-              onChange={handleChangeSearchQuery}
+              value={movieTitle}
+              onChange={handleChageMovieTitle}
             />
             <button className='search-form__button' type='submit'>
               Найти

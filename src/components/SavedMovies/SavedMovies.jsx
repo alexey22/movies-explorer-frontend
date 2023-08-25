@@ -11,58 +11,36 @@ import { useEffect, useState } from 'react';
 
 import MainApi from '../../utils/MainApi';
 
-function Movies({ savedMovies, setSavedMovies }) {
+import getFilteredMovies from '../../utils/getFilteredMovies';
+
+function Movies({ savedMovies, setSavedMovies, movies }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [isShort, setIsShort] = useState(false);
   const [findedSavedMovies, setFindedSavedMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setFindedSavedMovies(
-      savedMovies.filter(
-        (movie) =>
-          (!isShort || movie.duration < 40) &&
-          (movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase()))
-      )
-    );
-  }, [isShort, savedMovies]);
-
-  useEffect(() => {
-    if (localStorage.savedSearchQuery !== undefined)
-      setSearchQuery(localStorage.savedSearchQuery);
-
-    if (localStorage.isShortSaved === 'true') {
-      setIsShort(true);
-    } else {
-      setIsShort(false);
+    if (savedMovies === null) {
+      setIsLoading(true);
+      MainApi.getSavedMovies().then((movies) => {
+        setSavedMovies(movies);
+        setIsLoading(false);
+      });
     }
-
-    setIsLoading(true);
-    MainApi.getSavedMovies().then((movies) => {
-      setSavedMovies(movies);
-      setIsLoading(false);
-      setFindedSavedMovies(
-        movies.filter(
-          (movie) =>
-            (!isShort || movie.duration < 40) &&
-            (movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase()))
-        )
-      );
-    });
   }, []);
 
-  function handleSubmit() {
-    const _findedMovies = savedMovies.filter(
-      (movie) =>
-        (!isShort || movie.duration < 40) &&
-        (movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase()))
-    );
-    setFindedSavedMovies(_findedMovies);
+  useEffect(() => {
+    if (savedMovies === null) {
+      setFindedSavedMovies([]);
+    } else
+      setFindedSavedMovies(
+        getFilteredMovies(savedMovies, searchQuery, isShort)
+      );
+  }, [isShort, savedMovies]);
 
-    localStorage.setItem('savedSearchQuery', searchQuery);
+  function handleSubmit(title) {
+    setFindedSavedMovies(getFilteredMovies(savedMovies, title, isShort));
+    setSearchQuery(title);
   }
 
   return (

@@ -2,8 +2,6 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import './MoviesCardList.css';
 
-import { useState, useEffect } from 'react';
-
 import MainApi from '../../../utils/MainApi';
 
 function MoviesCardList({ movies, savedMovies, setSavedMovies, displayCount }) {
@@ -25,7 +23,7 @@ function MoviesCardList({ movies, savedMovies, setSavedMovies, displayCount }) {
 
   function handleDeleteSavedMovie(id) {
     const movieForDelete = savedMovies.find(
-      (savedMovie) => (savedMovie.movieId = id)
+      (savedMovie) => savedMovie.movieId === id
     );
     const movieForDeleteId = movieForDelete._id;
 
@@ -48,9 +46,13 @@ function MoviesCardList({ movies, savedMovies, setSavedMovies, displayCount }) {
             <MoviesCard
               movie={movie}
               key={movie.id}
-              isSaved={savedMovies.some(
-                (savedMovie) => savedMovie.movieId === movie.id
-              )}
+              isSaved={
+                savedMovies === null
+                  ? false
+                  : savedMovies.some(
+                      (savedMovie) => savedMovie.movieId === movie.id
+                    )
+              }
               onSaveMovie={handleSaveMovie}
               onDeleteSavedMovie={handleDeleteSavedMovie}
             />

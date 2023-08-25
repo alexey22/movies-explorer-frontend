@@ -1,5 +1,8 @@
 .navtab {
   background-color: black;
+}
+
+.navtab__container {
   display: flex;
   justify-content: center;
   max-width: 1280px;

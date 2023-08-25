@@ -10,7 +10,7 @@ import validate from '../../utils/validate';
 function Login({ onLogin, tokenCheck, loginError, setLoginError }) {
   useEffect(() => {
     setLoginError();
-    tokenCheck();
+    tokenCheck({ isBack: true });
   }, []);
 
   const [formValue, setFormValue] = useState({
@@ -55,7 +55,10 @@ function Login({ onLogin, tokenCheck, loginError, setLoginError }) {
 
       <h1 className='login__title'>Рады видеть!</h1>
       <form
-        onSubmit={(e) => onLogin(e, formValue.email, formValue.password)}
+        onSubmit={(e) => {
+          e.preventDefault();
+          onLogin(formValue.email, formValue.password);
+        }}
         className='login__form'
       >
         <label className='login__label' htmlFor='email'>

@@ -23,15 +23,15 @@ import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 function App() {
   const [currentUser, setCurrentUser] = useState({});
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.token ? true : false);
   const [userData, setUserData] = useState({ name: '', email: '' });
 
   const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState(null);
 
-  const [loginError, setLoginError] = useState();
-  const [registerError, setRegisterError] = useState();
-  const [profileError, setProfileError] = useState();
+  const [loginError, setLoginError] = useState('');
+  const [registerError, setRegisterError] = useState('');
+  const [profileError, setProfileError] = useState('');
 
   const navigate = useNavigate();
 
@@ -40,14 +40,14 @@ function App() {
     setLoggedIn(true);
   };
 
-  const tokenCheck = () => {
+  const tokenCheck = ({ isBack }) => {
     const jwt = localStorage.getItem('token');
     if (jwt) {
       auth
         .getContent(jwt)
         .then((data) => {
           handleLogin({ name: data?.name, email: data?.email });
-          navigate('/movies');
+          if (isBack) navigate(-1, { replace: true });
         })
         .catch((err) => {
           console.log(err);
@@ -55,9 +55,11 @@ function App() {
     }
   };
 
-  const onLogin = (e, email, password) => {
-    e.preventDefault();
+  useEffect(() => {
+    tokenCheck({ isBack: false });
+  }, []);
 
+  const onLogin = (email, password) => {
     auth
       .authorize({ email, password })
       .then((data) => {
@@ -66,6 +68,7 @@ function App() {
           localStorage.setItem('name', data.name);
           localStorage.setItem('email', data.email);
           handleLogin({ name: data.name, email: data.email });
+          MainApi.setAuthHeaderToken(data.token);
           navigate('/movies', { replace: true });
         }
       })
@@ -90,7 +93,7 @@ function App() {
     auth
       .register({ name, email, password })
       .then(() => {
-        navigate('/signin');
+        onLogin(email, password);
       })
       .catch((err) => {
         switch (err) {
@@ -116,6 +119,7 @@ function App() {
         setUserData({ name: user.name, email: user.email });
         localStorage.name = user.name;
         localStorage.email = user.email;
+        setProfileError('Данные пользователя успешно сохранены');
       })
       .catch((err) => {
         switch (err) {
@@ -142,22 +146,19 @@ function App() {
     localStorage.removeItem('searchQuery');
     localStorage.removeItem('isShort');
 
-    localStorage.removeItem('savedSearchQuery');
-    localStorage.removeItem('isShortSaved');
+    setMovies([]);
+    setSavedMovies(null);
     setUserData({ name: '', email: '' });
     setLoggedIn(false);
     navigate('/', { replace: true });
   }
 
-  useEffect(() => {
-    tokenCheck();
-  }, []);
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
-        <Route path='/' element={<Main loggedIn={loggedIn} />} />
+        <Route exact path='/' element={<Main loggedIn={loggedIn} />} />
         <Route
+          exact
           path='/movies'
           element={
             <ProtectedRoute
@@ -171,6 +172,7 @@ function App() {
           }
         />
         <Route
+          exact
           path='/saved-movies'
           element={
             <ProtectedRoute
@@ -178,10 +180,12 @@ function App() {
               savedMovies={savedMovies}
               setSavedMovies={setSavedMovies}
               loggedIn={loggedIn}
+              movies={movies}
             />
           }
         />
         <Route
+          exact
           path='/profile'
           element={
             <ProtectedRoute
@@ -196,6 +200,7 @@ function App() {
           }
         />
         <Route
+          exact
           path='/signin'
           element={
             <Login
@@ -207,6 +212,7 @@ function App() {
           }
         />
         <Route
+          exact
           path='/signup'
           element={
             <Register

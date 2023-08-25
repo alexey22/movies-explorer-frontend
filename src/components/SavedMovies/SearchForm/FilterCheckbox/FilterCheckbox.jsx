@@ -12,9 +12,7 @@ function FilterCheckbox({ isShort, setIsShort }) {
           id='short'
           checked={isShort}
           onChange={() => {
-            const tempIsShort = isShort;
-            localStorage.isShortSaved = !tempIsShort;
-            setIsShort(!tempIsShort);
+            setIsShort(!isShort);
           }}
         />
         <span className='filter__visible-checkbox'></span>

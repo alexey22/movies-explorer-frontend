@@ -8,10 +8,10 @@ class Api {
     return this._headers;
   }
 
-  setAuthHeaderTokenFromLocalStorage() {
+  setAuthHeaderToken(token) {
     this._headers = {
       ...this._headers,
-      authorization: `Bearer ${localStorage.getItem('token')}`,
+      authorization: `Bearer ${token}`,
     };
   }
 

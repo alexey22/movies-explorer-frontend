@@ -16,14 +16,16 @@ function Header({ isLoggedIn }) {
         location.pathname === '/' ? 'portfolio' : 'movies'
       }`}
     >
-      <Link to='/'>
-        <img
-          className='header__logo'
-          src={logo}
-          alt='Логотип Movies Explorer'
-        ></img>
-      </Link>
-      <Navigation isLoggedIn={isLoggedIn} />
+      <div className='header__container'>
+        <Link to='/'>
+          <img
+            className='header__logo'
+            src={logo}
+            alt='Логотип Movies Explorer'
+          ></img>
+        </Link>
+        <Navigation isLoggedIn={isLoggedIn} />
+      </div>
     </header>
   );
 }
