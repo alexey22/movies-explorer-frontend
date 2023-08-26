@@ -50,6 +50,10 @@
   margin-top: auto;
 }
 
+.about-me__photo {
+  border-radius: 10px;
+}
+
 .about-me__link:hover {
   opacity: 0.7;
 }
