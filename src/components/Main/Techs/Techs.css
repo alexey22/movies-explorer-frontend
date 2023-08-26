@@ -1,8 +1,11 @@
 .techs {
-  max-width: 1140px;
-  margin: 0 auto;
   padding: 100px 70px 0;
   background-color: #f5f5f5;
+}
+
+.techs__container {
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .techs__header {

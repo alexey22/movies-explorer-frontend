@@ -18,7 +18,6 @@ function Register({ onRegister, registerError, setRegisterError }) {
     name: true,
     email: true,
     password: true,
-    initial: true,
   });
 
   useEffect(() => {
@@ -36,18 +35,17 @@ function Register({ onRegister, registerError, setRegisterError }) {
     });
 
     if (name === 'name') {
-      setIsValid({ ...isValid, name: validate.Name(value), initial: false });
+      setIsValid({ ...isValid, name: validate.Name(value) });
     }
 
     if (name === 'email') {
-      setIsValid({ ...isValid, email: validate.Email(value), initial: false });
+      setIsValid({ ...isValid, email: validate.Email(value) });
     }
 
     if (name === 'password') {
       setIsValid({
         ...isValid,
         password: validate.Password(value),
-        initial: false,
       });
     }
   };
@@ -129,13 +127,21 @@ function Register({ onRegister, registerError, setRegisterError }) {
             isValid.name &&
             isValid.email &&
             isValid.password &&
-            !isValid.initial
+            formValue.name &&
+            formValue.email &&
+            formValue.password
               ? 'reg__button '
               : 'reg__button reg__button_disabled'
           }
           disabled={
-            !(isValid.name && isValid.email && isValid.password) ||
-            isValid.initial
+            !(
+              isValid.name &&
+              isValid.email &&
+              isValid.password &&
+              formValue.name &&
+              formValue.email &&
+              formValue.password
+            )
           }
         >
           Зарегистрироваться
