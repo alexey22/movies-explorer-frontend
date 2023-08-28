@@ -1,0 +1,163 @@
+.reg {
+  max-width: 396px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.reg__logo {
+  margin-top: 70px;
+  margin-bottom: 40px;
+}
+
+.reg__logo:hover {
+  opacity: 0.7;
+}
+
+.reg__logo-image {
+  display: block;
+}
+
+.reg__title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.reg__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.reg__label {
+  color: #a0a0a0;
+  font-size: 10px;
+  line-height: 12px;
+  margin-bottom: 10px;
+}
+
+.reg__input {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  border: 0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  outline: 0;
+  padding: 15px;
+  margin-bottom: 0px;
+}
+
+.reg__input_type_error {
+  color: #ff4062;
+  margin-bottom: 3px;
+}
+
+.reg__error-massage {
+  color: #ff4062;
+  font-size: 10px;
+  line-height: 12px;
+  margin-bottom: 6px;
+  min-height: 12px;
+}
+
+.reg__error {
+  color: #ff004c;
+  font-size: 11px;
+  line-height: 13px;
+  padding-top: 44px;
+  text-align: center;
+  min-height: 13px;
+}
+
+.reg__button {
+  border: 0;
+  border-radius: 3px;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  margin-top: 20px;
+  padding-top: 13px;
+  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.reg__button:hover {
+  opacity: 0.8;
+}
+
+.reg__button_disabled {
+  opacity: 0.5;
+  cursor: inherit;
+}
+
+.reg__button_disabled:hover {
+  opacity: 0.5;
+}
+
+.reg__text {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  margin: 16px 0 70px;
+  color: #a0a0a0;
+  text-align: center;
+}
+
+.reg__link {
+  text-decoration: none;
+  color: black;
+  margin-left: 6px;
+}
+
+.reg__link:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+  .reg__logo {
+    margin-top: 232px;
+  }
+}
+
+@media screen and (max-width: 456px) {
+  .reg {
+    margin: 0 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reg__logo {
+    margin-top: 56px;
+    margin-bottom: 50px;
+    align-self: center;
+  }
+
+  .reg__form {
+    margin-top: 60px;
+  }
+
+  .reg__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .reg__error {
+    margin-top: 90px;
+  }
+
+  .reg__button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .reg__text {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 14px 0 30px;
+  }
+}

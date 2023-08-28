@@ -1,0 +1,25 @@
+.section-header__h2 {
+  font-size: 22px;
+  line-height: 27px;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: -0.04em;
+}
+
+.section-header__horizontal-line {
+  height: 1px;
+  background-color: black;
+  width: 100%;
+  margin-top: 23px;
+}
+
+@media screen and (max-width: 425px) {
+  .section-header__h2 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .section-header__horizontal-line {
+    margin-top: 28px;
+  }
+}

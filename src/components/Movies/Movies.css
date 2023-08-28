@@ -1,0 +1,25 @@
+.movies {
+  display: flex;
+  flex-direction: column;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 70px 70px 0;
+  min-height: calc(100vh - 74px - 244px);
+}
+
+.movies__not-found {
+  text-align: center;
+  margin: 30px auto;
+}
+
+@media screen and (max-width: 768px) {
+  .movies {
+    padding: 80px 30px 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .movies {
+    padding: 80px 10px 0;
+  }
+}

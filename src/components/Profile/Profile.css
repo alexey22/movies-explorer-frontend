@@ -1,0 +1,158 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  max-width: 410px;
+  margin: 0 auto;
+}
+
+.profile__title {
+  margin: 0;
+  text-align: center;
+  padding-top: 74px;
+  padding-bottom: 105px;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 500;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__input-container {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.profile__label {
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+  align-self: center;
+}
+
+.profile__input {
+  border: none;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 400;
+  text-align: end;
+  outline: none;
+  padding: 17px 0;
+}
+
+.profile__input:disabled {
+  background-color: white;
+}
+
+.profile__input_type_error {
+  color: #ff4062;
+}
+
+.profile__error {
+  color: #ff004c;
+  font-size: 11px;
+  line-height: 13px;
+  padding-top: 163px;
+  text-align: center;
+  min-height: 13px;
+}
+
+.profile__edit-button {
+  border: none;
+  display: block;
+  background-color: rgba(1, 1, 1, 0);
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  margin-top: 27px;
+  cursor: pointer;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.7;
+}
+
+.profile__logout-button {
+  display: block;
+  border: none;
+  background-color: rgba(1, 1, 1, 0);
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #ff4062;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.profile__logout-button:hover {
+  opacity: 0.7;
+}
+
+.profile__save-button {
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  line-height: 17px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-top: 27px;
+  margin-bottom: 50px;
+  border: 0;
+}
+
+.profile__save-button:hover {
+  opacity: 0.8;
+}
+
+.profile__save-button_disabled {
+  opacity: 0.5;
+  cursor: inherit;
+}
+
+.profile__save-button_disabled:hover {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__title {
+    padding-top: 236px;
+    padding-bottom: 80px;
+  }
+
+  .profile__edit-button {
+    margin-top: 190px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .profile__form {
+    margin: 0 30px;
+  }
+
+  .profile__title {
+    padding-top: 70px;
+    padding-bottom: 64px;
+  }
+
+  .profile__save-button {
+    margin: 363px 30px 0;
+  }
+
+  .profile__edit-button {
+    font-weight: 500;
+    margin-top: 360px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__logout-button {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

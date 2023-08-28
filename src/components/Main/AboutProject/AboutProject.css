@@ -1,0 +1,132 @@
+.about-project {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 110px 70px 0;
+}
+
+.about-project__description {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  padding-top: 70px;
+}
+
+.about-project__h3 {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  margin: 0 0 26px 0;
+  letter-spacing: -0.04em;
+}
+
+.about-project__text {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.about-project__progress-bar {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: repeat(2, 36px);
+  font-size: 14px;
+  line-height: 17px;
+  padding-top: 110px;
+  padding-bottom: 105px;
+}
+
+.about-project__part-one {
+  color: white;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+}
+
+.about-project__part-two {
+  background-color: #f2f2f2;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+}
+
+.about-project__part-one-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+.about-project__part-two-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 90px 50px 0;
+  }
+
+  .about-project__description {
+    column-gap: 30px;
+    padding-top: 70px;
+  }
+
+  .about-project__h3 {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 22px;
+  }
+
+  .about-project__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__progress-bar {
+    padding-top: 93px;
+    padding-bottom: 87px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .about-project {
+    padding: 70px 18px 0;
+  }
+
+  .about-project__h3 {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 16px;
+  }
+
+  .about-project__text {
+    font-size: 11px;
+    line-height: 16px;
+    padding-bottom: 56px;
+  }
+
+  .about-project__description {
+    grid-template-columns: 1fr;
+    padding-top: 60px;
+  }
+
+  .about-project__progress-bar {
+    padding-top: 4px;
+    padding-bottom: 60px;
+    font-size: 11px;
+    line-height: 13px;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: repeat(2, 35px);
+  }
+}
